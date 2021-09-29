@@ -10,23 +10,50 @@
     <title>U-Hiker</title>
 </head>
 <body>
-    <header id="siteTitle" class="container-fluid bg-success text-white mt-3">
-        U-Hiker
+
+    <header id="siteTitle" class="container-fluid bg-success text-white mt-3 text-success ms-3">
+        <h1>U-Hiker</h1>
     </header>
+
     <main class="container container-fluid">
-        <h1 class="">Find Your Modern Adventure Here</h1>
-        <div id="searchForm" class="input-group">
-            <input id="search_input" type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Search...">
-            <button id="search_results" type="button" class="btn btn-outline-secondary"></button>
-            <button type="button" class="btn btn-outline-secondary dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Dropdown item 1</a></li>
-                <li><a class="dropdown-item" href="#">Dropdown item 2</a></li>
-                <li><a class="dropdown-item" href="#">Dropdown item 3</a></li>
-            </ul>
+        <h1 class="text-center mt-5">Find Your Modern Adventure Here</h1>
+        <div class="row">
+            <div class="col-12 col-sm-3 col-md-6 col-lg-4 col-xl-3">
+                
+            </div>
+            <div id="searchForm" class="input-group col-12 col-sm-9 col-md-6 col-lg-8 col-xl-9 mt-4">
+                <input id="search_input" type="text" class="form-control" aria-label="Text input with segmented dropdown button"
+                    placeholder="Search...">
+                <button id="search_results" type="button" class="btn btn-outline-secondary"></button>
+                <button type="button" class="btn btn-outline-secondary dropdown-toggle-split" data-bs-toggle="dropdown"
+                    aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="./results.html">Dropdown item 1</a></li>
+                    <li><a class="dropdown-item" href="./results.html">Dropdown item 2</a></li>
+                    <li><a class="dropdown-item" href="./results.html">Dropdown item 3</a></li>
+                </ul>
+            </div>
         </div>
-        <div id="searchHistory" class="card-header"></div>
-        <div id="results"></div>
+        
+        <div class="row">
+            <div id="searchHistory" class="card card-header border border-dark border-1 mt-4 col-12 col-sm-3 col-md-6 col-lg-4 col-xl-3">
+                <h3>Search History: </h3>
+                <div class="card border border-dark border-2 mt-3">
+                <div class="card card-body">
+                    <div id="search_history_buttons" class="btn bt"></div>
+
+                </div>
+            
+                </div>
+            </div>
+            <div id="results" class="col-12 col-sm-8 col-md-5 col-lg-7 col-xl-8 border border-2 border-dark mt-4 ms-1">
+
+            </div>
+
+        </div>
+        
+
+        
     </main>
     <footer id="acknowledgements"><a href="ridb.recreation.gov"></a></footer>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
