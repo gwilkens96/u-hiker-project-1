@@ -1,7 +1,10 @@
 //Javascript file for results page to display the resulting route
 
-//Button to "Plan a new trip"
+//Button to return to the index page
+//Button to plan the route and give directions
 
-//Functions to get Starting and Ending Locations
+//Get destination location from the index and display in box
 
-//Functions to display the route directions
+//Accept a starting location for directions between start/end
+
+//Functions to display the route directions from api
