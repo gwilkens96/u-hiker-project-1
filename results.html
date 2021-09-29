@@ -10,33 +10,30 @@
 <body>
 <header>
     <h1>U-Hiker</h1>
+    <button type="button" class="col-1 btn btn-success" id="returnBtn">
+        Return
+    </button>
 
-        <h2>Route Planner</h2>
-        <button type="button" class="col-1 btn btn-success" id="returnBtn">Return
-
-        <h2 class="position-absolute top-20 start-50 translate-middle">
-            Route Planner
-        </h2>
-        <button type="button" class="col-1 btn btn-success ">Return
-
-        </button>
+    <h2>
+        Route Planner
+    </h2>
 </header>
     
     <div class="container">
         <div class="row">
           <div class="col mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Origin</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">   
+            <label for="originFormInput" class="form-label">Origin</label>
+            <input type="text" class="form-control" id="originFormInput">   
           </div>
           <div class="col mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Destination</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1">
+            <label for="destinationFormlInput" class="form-label">Destination</label>
+            <input type="text" class="form-control" id="destinationFormlInput">
           </div>
           <button type="button" class="col-2 btn btn-success" id="planBtn">Plan my route!
           </button>
         </div>
 
-    <ul style="list-style-type:none;"> 
+    <ul style="list-style-type:none;" id='directions'> 
     Route Directions
         <li>
 
