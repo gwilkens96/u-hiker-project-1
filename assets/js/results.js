@@ -12,6 +12,8 @@ document.getElementById("planBtn").addEventListener("click", planButton);
 
 function planButton(){
     //Using API plan out directions for display
+    //Verify button is functional
+    window.location.href="http://www.google.com";
 }
 
 
