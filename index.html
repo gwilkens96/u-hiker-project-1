@@ -10,12 +10,14 @@
     <title>U-Hiker</title>
 </head>
 <body>
+
     <header id="siteTitle" class="container-fluid bg-success text-white mt-3">
         <h1>U-Hiker</h1>
     </header>
+
     <main class="container container-fluid">
-        <h1 class="">Find Your Modern Adventure Here</h1>
-        <div id="searchForm" class="input-group">
+        <h1 class="display-5 text-center mt-4">Find Your Modern Adventure Here</h1>
+        <div id="searchForm" class="input-group mt-5">
             <input type="text" class="form-control" aria-label="Text input with segmented dropdown button" placeholder="Search...">
             <button type="button" class="btn btn-outline-secondary"><icon class="bi bi-search"></icon></button>
             <button type="button" class="btn btn-outline-secondary dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
@@ -25,8 +27,11 @@
                 <li><a class="dropdown-item" href="#">Dropdown item 3</a></li>
             </ul>
         </div>
-        <div id="searchHistory" class="card-header"></div>
-        <div id="results"></div>
+        <div id="searchHistory" class="card-header mt-4 col-sm-3 col-md-6 col-lg-4 col-xl-3">
+            <div class="card border border-dark border-2 mt-3"></div>
+        </div>
+
+        <div id="results" class="col-sm-9 col-md-6 col-lg-8 col-xl-9"></div>
     </main>
     <footer id="acknowledgements"><a href="ridb.recreation.gov"></a></footer>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
