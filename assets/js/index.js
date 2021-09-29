@@ -1,12 +1,23 @@
 //get elements by id
 
 //function to call location data
+//prevent default
+function callData () {
 
-//function to get location data 
+}
+
+//function to get api location data 
+function fetchApi() {
+
+}
 
 //function to display location data
+function displayData() {
+
+}
 
 // add event listener for button click
+
 
 //button should display local parks in the area
 
