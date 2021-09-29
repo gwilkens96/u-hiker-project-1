@@ -3,7 +3,7 @@
 //Button to return to the index page
 //document.getElementById("returnBtn").onclick=returnButton();
 
-document.getElementById("returnBtn").addEventListener("click",returnButton());
+document.getElementById("returnBtn").addEventListener("click", returnButton);
 
 function returnButton() {
     window.location.href="index.html";
