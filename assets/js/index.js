@@ -7,7 +7,7 @@ var search_results = $('#search_results');
 function callData (event) {
     event.preventDefault();
 
-    var city = search_input.value;
+    var city = search_input[0].value;
 
     fetchApi(city);
 
@@ -18,13 +18,34 @@ function callData (event) {
 
 //function to get api location data 
 function fetchApi() {
-    var api = 'https://ridb.recreation.gov/api/v1/recareaaddresses?limit=50&offset=0'
-    fetch(api)
-    .then(response => response.json())
-    .then(data => {
-        displayData(data);
-        console.log(data);
+    fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=city", {
+	"method": "GET",
+	"headers": {
+		"x-api-key": "UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz",
+		"x-rapidapi-host": "jonahtaylor-national-park-service-v1.p.rapidapi.com",
+		"x-rapidapi-key": "2e6933d8d8mshb841bab9a6b2a2bp14f49fjsn4b079c322eb4"
+	}
 })
+.then(function (response){
+     return response.json()
+ })
+ .then(function (data){
+     console.log(data)
+ })
+    //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
+    //var hostUrl = 'https://enigmatic-citadel-24557.herokuapp.com/';
+    // fetch(api)  
+    // .then(function (response){
+    //     return response.json()
+    // })
+    // .then(function (data){
+    //     console.log(data)
+    // })
+
+//     .then(data => {
+//      displayData(data);
+//      console.log(data);
+// })
 }
 
 //function to display location data
