@@ -5,9 +5,10 @@ var search_results = $('#search_results');
 let searchHistory = document.querySelector('#searchHistory')
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
+let resultsDisplayPanel2 = document.querySelector('#resultsDisplayPanel2');
 
 let cities = [];
-let parks = [];
+// let parks = [];
 let locallyStoredParks = [];
 let storedParks = [];
 
@@ -15,21 +16,12 @@ const renderCities = () => {
     searchHistory.innerHTML = '';
     for (let i = 0; i < cities.length; i++){
         let city = cities[i];
-        
-        let a = document.createElement('a');
-        
-        a.href = './results.html';
-
         let button = document.createElement('button');
-        button.setAttribute('class', 'btn btn-link mt-2');
-        button.addEventListener('click', callData)
-    
+        button.setAttribute('class', 'btn btn-success');
+        button.setAttribute('id', 'search_history_buttons');
+        button.setAttribute('type', 'submit')
         button.textContent = city;
-        button.value = button.textContent
-        
-        button.appendChild(a);
         searchHistory.appendChild(button);
-        // searchHistory.appendChild(li);
     }
 }
 
@@ -53,6 +45,30 @@ const storeCities = () => {
 const saveParks = (storedParks) => {
     localStorage.setItem('storedParks', JSON.stringify(storedParks));
 }
+function displayData() {
+    parks = (JSON.parse(localStorage.getItem('storedParks')))
+    for (let i = 0; i < parks.length; i++){
+        park = parks[i];
+        let parkName = park.fullName;
+        let parkDescription = park.description; 
+        let parkPictures = park.images[i];
+        let parklatitude = park.latitude;
+        let parklongitude = park.longitude;
+        console.log(parklongitude)
+        console.log(parklatitude)
+        console.log(parkPictures)
+        console.log(parkDescription)
+        console.log(parkName)
+
+        let h3 = document.createElement('h3');
+        h3.textContent = parkName;
+        let p = document.createElement('p');
+        p.textContent = parkDescription;
+
+        resultsDisplayPanel2.append(h3)
+        resultsDisplayPanel2.append(p)
+    }
+}
 
 function callData (event) {
     event.preventDefault();
@@ -65,7 +81,18 @@ function callData (event) {
     cities.push(city);
     search_input.value = '';
     storeCities();
+    displayData();
     renderCities();
+}
+
+const callHistory = (event) => {
+    event.preventDefault();
+
+    let city = searchHistoryButtonsEl.textContent;
+    
+
+
+
 }
 //function to get api location data 
 function fetchApi() {
@@ -81,21 +108,13 @@ function fetchApi() {
      return response.json()
  })
  .then(function (data){
-     for (let i = 0; i < data.length; i++) {
-        // console.log(data)
-     }
-    //  console.log(data.data)
      for (let i = 0; i < data.data.length; i++){
         locallyStoredParks.push(data.data[i]);
         saveParks(locallyStoredParks);
     };
  })
 }
-
+searchHistoryButtonsEl.click(callHistory);
 search_results.click(callData);
 init();
 //function to display location data
-function displayData(parks) {
-    
-
-}
