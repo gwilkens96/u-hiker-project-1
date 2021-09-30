@@ -12,10 +12,11 @@ function callData (event) {
     fetchApi(city);
 
     console.log(city);
+    displayData();
     //this is to save the users search history to local storage
-    savePreferences(city);
+    //savePreferences(city);
     //this is to clear the input search bar
-    search_input = '';
+   // search_input = '';
 }
 
 //function to get api location data 
@@ -62,7 +63,8 @@ function fetchApi() {
 //function to display location data
 function displayData(data) {
     $('#resultsDisplayPanel2').append(
-        `<div> City: ${data}</div>
+        `<div> City: ${data.city}</div>
+         <div> Address: ${data.addresses}</div>
         `
     );
 
