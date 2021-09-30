@@ -9,13 +9,17 @@ var resultsDisplay2 = $('#resultsDisplayPanel');
 var cityName = document.createElement('p');
 var cityAddress = document.createElement('p');
 
-let storedCities = [];
-let suggestedCities = [];
+let cities = [];
+let parks = [];
+let locallyStoredParks = [];
+let storedParks = [];
 
-const renderCities = (searchCount) => {
-    searchHistoryButtonsEl.innerHtml = '';
-    for (let i = 0; i < searchCount; i++){
-        let city = storedCities[i];
+const renderCities = () => {
+    searchHistoryEl.innerHtml = '';
+    searchCountSpanEl.textContent = cities.length;
+
+    for (let i = 0; i < cities.length; i++){
+        let city = cities[i];
 
         $('searchHistoryButtonsEl').empty();
 
@@ -24,38 +28,45 @@ const renderCities = (searchCount) => {
         li.setAttribute('data-index', i);
         li.setAttribute('class', 'list-group-item list-group-item-action');
         li.setAttribute('href', './results.html');
-        $('search_history_buttons').appendChild();
+        $('search_history_buttons').append(li);
     }
 }
 
-//function to call location data
-//prevent default
+const init = () => {
+    // let parksToDisplay = JSON.parse('storedParks');
+
+    let storedCities = JSON.parse(localStorage.getItem('cities'));
+    console.log(storedCities)
+
+    if(storedCities !== null) {
+        cities = storedCities
+    }
+
+    renderCities();
+}
+
+const storeCities = () => {
+    localStorage.setItem('cities', JSON.stringify(cities));
+};
+
+const saveParks = (storedParks) => {
+    localStorage.setItem('storedParks', JSON.stringify(storedParks));
+}
+
 function callData (event) {
     event.preventDefault();
 
     var city = search_input[0].value;
-
     fetchApi(city);
+    if (city === ''){
+        return;
+    }
 
-    console.log(city);
-    
-    //displayData2(city);
-    //this is to save the users search history to local storage
-    //savePreferences(city);
-    //this is to clear the input search bar
-   // search_input = '';
+    cities.push(city);
+    search_input.value = '';
+    storeCities();
+    renderCities();
 }
-
-// const init = () => {
-//     let searchCount = storedCities.length;
-//     if (searchCount !== (null || undefined)) {
-//         renderCities();
-//     } else {
-//         let storedCities = suggestedCities;
-//     }
-
-// }
-
 //function to get api location data 
 function fetchApi(city) {
     fetch(("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=" + city), {
@@ -75,69 +86,21 @@ function fetchApi(city) {
      }
     //  console.log(data.data)
      for (let i = 0; i < data.data.length; i++){
-        console.log(data.data[i]);
-        console.table(data.data[i]);
-        
-    }
-    displayData(data);
+        locallyStoredParks.push(data.data[i]);
+        saveParks(locallyStoredParks);
+    };
  })
-    //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
-    //var hostUrl = 'https://enigmatic-citadel-24557.herokuapp.com/';
-    // fetch(api)  
-    // .then(function (response){
-    //     return response.json()
-    // })
-    // .then(function (data){
-    //     console.log(data)
-    // })
-
-//     .then(data => {
-//      displayData(data);
-//      console.log(data);
-// })
 }
-// function to save the users searches to local storage 
-// const savePreferences = (storedCities) => {
-//     localStorage.setItem('storedCities', JSON.stringify(storedCities));
-// };
 
-// // function to retrieve user's search history 
-// const getPreferences = (storedCities) => {
-//     storedCities = JSON.parse(localStorage.getItem(storedCities));
-//     console.log(storedCities)
-// };
-
-// //function to display location data
-// function displayData2(data) {
-//     let parksData = [];
-//     for (let i = 0; i < data.length; i++){
-//         parksData.push(data[i]);
-//         console.log(parksData)
-//     }
-//       const savePreference = () => {
-//      storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
-//  };
-
-// // function to retrieve user's search history 
-//  const getPreferences = () => {
-//      storedCities = JSON.parse(localStorage.getItem("storedCities"));
-//  };
 
 //function to display location data
-function displayData(data) {
-    console.log(data);
-    cityName.textContent = data.name;
-    cityAddress.textContent = data.addresses;
-    console.log(resultsDisplay2);
-    resultsDisplay2[0].appendChild(cityName);
-    resultsDisplay2[0].appendChild(cityAddress);
+function displayData() {
+    
 
 }
 
-// add event listener for button click
 search_results.click(callData);
-//init();
-
+init();
 
 //button should display local parks in the area
 
