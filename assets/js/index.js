@@ -12,8 +12,10 @@ function callData (event) {
     fetchApi(city);
 
     console.log(city);
-
-
+    //this is to save the users search history to local storage
+    savePreferences(city);
+    //this is to clear the input search bar
+    search_input = '';
 }
 
 //function to get api location data 
@@ -47,6 +49,15 @@ function fetchApi() {
 //      console.log(data);
 // })
 }
+// function to save the users searches to local storage 
+// const savePreference = () => {
+//     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
+// };
+
+// function to retrieve user's search history 
+// const getPreferences = () => {
+//     storedCities = JSON.parse(localStorage.getItem("storedCities"));
+// };
 
 //function to display location data
 function displayData() {
