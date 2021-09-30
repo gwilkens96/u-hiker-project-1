@@ -35,22 +35,23 @@ function callData (event) {
     fetchApi(city);
 
     console.log(city);
-    displayData();
+    displayData(city);
+    //displayData2(city);
     //this is to save the users search history to local storage
     //savePreferences(city);
     //this is to clear the input search bar
    // search_input = '';
 }
 
-const init = () => {
-    let searchCount = storedCities.length;
-    if (searchCount !== (null || undefined)) {
-        renderCities();
-    } else {
-        let storedCities = suggestedCities;
-    }
+// const init = () => {
+//     let searchCount = storedCities.length;
+//     if (searchCount !== (null || undefined)) {
+//         renderCities();
+//     } else {
+//         let storedCities = suggestedCities;
+//     }
 
-}
+// }
 
 //function to get api location data 
 function fetchApi() {
@@ -91,45 +92,41 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
-const savePreferences = (storedCities) => {
-    localStorage.setItem('storedCities', JSON.stringify(storedCities));
-};
+// const savePreferences = (storedCities) => {
+//     localStorage.setItem('storedCities', JSON.stringify(storedCities));
+// };
 
-// function to retrieve user's search history 
-const getPreferences = (storedCities) => {
-    storedCities = JSON.parse(localStorage.getItem(storedCities));
-    console.log(storedCities)
-};
+// // function to retrieve user's search history 
+// const getPreferences = (storedCities) => {
+//     storedCities = JSON.parse(localStorage.getItem(storedCities));
+//     console.log(storedCities)
+// };
+
+// //function to display location data
+// function displayData2(data) {
+//     let parksData = [];
+//     for (let i = 0; i < data.length; i++){
+//         parksData.push(data[i]);
+//         console.log(parksData)
+//     }
+//       const savePreference = () => {
+//      storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
+//  };
+
+// // function to retrieve user's search history 
+//  const getPreferences = () => {
+//      storedCities = JSON.parse(localStorage.getItem("storedCities"));
+//  };
 
 //function to display location data
 function displayData(data) {
-    let parksData = [];
-    for (let i = 0; i < data.length; i++){
-        parksData.push(data[i]);
-        console.log(parksData)
-    }
-      const savePreference = () => {
-     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
- };
-
-// function to retrieve user's search history 
- const getPreferences = () => {
-     storedCities = JSON.parse(localStorage.getItem("storedCities"));
- };
-
-//function to display location data
-function displayData(data) {
-    $('#resultsDisplayPanel2').append(
-        `<div> City: ${data.city}</div>
-         <div> Address: ${data.addresses}</div>
-        `
-    );
+    
 
 }
 
 // add event listener for button click
 search_results.click(callData);
-init();
+//init();
 
 
 //button should display local parks in the area
