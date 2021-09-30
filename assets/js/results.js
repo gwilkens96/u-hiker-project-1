@@ -21,9 +21,6 @@ function planButton(){
 //Get destination location from the index and display in box
 
 //Accept a starting location for directions between start/end
-<<<<<<< HEAD
-fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=110+S+Main+St,+Hiawassee+GA&to=541+Historic+Hwy,+Demorest+GA')
-=======
 
 // JavaScript code
 function search_origin() {
@@ -55,7 +52,6 @@ function search_destination() {
 		}
 	}
 }
->>>>>>> 95db5f28f7dbf4cc915d8cc8d14734d5bffeb204
 
 fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=110+S+Main+St,+Hiawassee+GA&to=541+Historic+Hwy,+Demorest+GA')
 
