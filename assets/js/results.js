@@ -15,7 +15,8 @@ document.getElementById("planBtn").addEventListener("click", planButton);
 function planButton(){
     //Using API plan out directions for display
     //Verify button is functional
-    window.location.href="http://www.google.com";
+	window.location.href="http://www.google.com";
+	
 }
 
 //Get destination location from the index and display in box
@@ -57,5 +58,3 @@ fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=1
 
 //Functions to display the route directions from api
 var app = document.querySelector('#directions');
-
-var 
