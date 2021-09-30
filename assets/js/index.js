@@ -6,14 +6,17 @@ let searchHistoryEl = $('#searchHistory');
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
 
+let cities = [];
+let parks = [];
+let locallyStoredParks = [];
+let storedParks = [];
 
-let locallyStoredCities = [];
-let storedCities = [];
-let suggestedCities = [];
+const renderCities = () => {
+    searchHistoryEl.innerHtml = '';
+    searchCountSpanEl.textContent = cities.length;
 
-const renderCities = (storedCities) => {
-    for (let i = 0; i < storedCities; i++){
-        let city = storedCities[i];
+    for (let i = 0; i < cities.length; i++){
+        let city = cities[i];
 
         $('searchHistoryButtonsEl').empty();
 
@@ -22,37 +25,48 @@ const renderCities = (storedCities) => {
         li.setAttribute('data-index', i);
         li.setAttribute('class', 'list-group-item list-group-item-action');
         li.setAttribute('href', './results.html');
-        $('search_history_buttons').appendChild();
+        $('search_history_buttons').append(li);
     }
 }
 
-//function to call location data
-//prevent default
+const init = () => {
+    // let parksToDisplay = JSON.parse('storedParks');
+
+    let storedCities = JSON.parse(localStorage.getItem('cities'));
+    console.log(storedCities)
+
+    if(storedCities !== null) {
+        cities = storedCities
+    }
+
+    renderCities();
+}
+
+const storeCities = () => {
+    localStorage.setItem('cities', JSON.stringify(cities));
+};
+
+const saveParks = (storedParks) => {
+    localStorage.setItem('storedParks', JSON.stringify(storedParks));
+}
+
 function callData (event) {
     event.preventDefault();
 
     var city = search_input[0].value;
-
     fetchApi(city);
-
-    console.log(city);
-    locallyStoredCities.push(city)
-    console.log(locallyStoredCities)
-    //this is to save the users search history to local storage
-    savePreferences(locallyStoredCities);
-    //this is to clear the input search bar
-    search_input.value = '';
-}
-
-const init = () => {
-    let searchCount = storedCities.length;
-    if (searchCount !== (null || undefined)) {
-        renderCities();
-    } else {
-        let storedCities = suggestedCities;
+    if (city === ''){
+        return;
     }
 
+    cities.push(city);
+    search_input.value = '';
+    storeCities();
+    renderCities();
 }
+
+search_results.click(callData);
+init();
 
 //function to get api location data 
 function fetchApi() {
@@ -73,11 +87,9 @@ function fetchApi() {
      }
     //  console.log(data.data)
      for (let i = 0; i < data.data.length; i++){
-        // console.log(data.data[i]);
-        // console.table(data.data[i]);
-        // savePreferences(data.data[i])
-        // displayData(data.data[i])
-    }
+        locallyStoredParks.push(data.data[i]);
+        saveParks(locallyStoredParks);
+    };
  })
     //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
     //var hostUrl = 'https://enigmatic-citadel-24557.herokuapp.com/';
@@ -95,29 +107,17 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
-const savePreferences = (storedCities) => {
-    localStorage.setItem('storedCities', JSON.stringify(storedCities));
-};
 
-// function to retrieve user's search history 
-const getPreferences = (storedCities) => {
-    JSON.parse(localStorage.getItem(storedCities));
-    // console.log(storedCities)
-};
+
+
+
+
 
 //function to display location data
-// function displayData(data) {
-//     let parksData = [];
-//     for (let i = 0; i < data.length; i++){
-//         parksData.push(data[i]);
-//         console.log(parksData)
-//     }
-// }
+function displayData(parks) {
+    
 
-// add event listener for button click
-search_results.click(callData);
-init();
-
+}
 
 //button should display local parks in the area
 
