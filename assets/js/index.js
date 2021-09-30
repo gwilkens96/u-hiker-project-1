@@ -64,10 +64,6 @@ function callData (event) {
     storeCities();
     renderCities();
 }
-
-search_results.click(callData);
-init();
-
 //function to get api location data 
 function fetchApi() {
     fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=city", {
@@ -91,23 +87,10 @@ function fetchApi() {
         saveParks(locallyStoredParks);
     };
  })
-    //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
-    //var hostUrl = 'https://enigmatic-citadel-24557.herokuapp.com/';
-    // fetch(api)  
-    // .then(function (response){
-    //     return response.json()
-    // })
-    // .then(function (data){
-    //     console.log(data)
-    // })
-
-//     .then(data => {
-//      displayData(data);
-//      console.log(data);
-// })
 }
-// function to save the users searches to local storage 
 
+search_results.click(callData);
+init();
 
 
 
