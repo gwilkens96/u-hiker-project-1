@@ -91,7 +91,6 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
-<<<<<<< HEAD
 const savePreferences = (storedCities) => {
     localStorage.setItem('storedCities', JSON.stringify(storedCities));
 };
@@ -109,7 +108,6 @@ function displayData(data) {
         parksData.push(data[i]);
         console.log(parksData)
     }
-=======
       const savePreference = () => {
      storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
  };
@@ -127,7 +125,6 @@ function displayData(data) {
         `
     );
 
->>>>>>> e50cd7350b329f9ead5917b0a6e1ec95169c7ced
 }
 
 // add event listener for button click
