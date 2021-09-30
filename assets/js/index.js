@@ -9,9 +9,8 @@ let searchCountSpanEl = $('#searchCountSpan');
 let storedCities = [];
 let suggestedCities = [];
 
-const renderCities = (searchCount) => {
-    searchHistoryButtonsEl.innerHtml = '';
-    for (let i = 0; i < searchCount; i++){
+const renderCities = (storedCities) => {
+    for (let i = 0; i < storedCities.length; i++){
         let city = storedCities[i];
 
         $('searchHistoryButtonsEl').empty();
@@ -71,7 +70,9 @@ function fetchApi() {
     //  console.log(data.data)
      for (let i = 0; i < data.data.length; i++){
         console.log(data.data[i]);
-        console.table(data.data[i]);
+        // console.table(data.data[i]);
+        savePreferences(data.data[i])
+        displayData(data.data[i])
     }
  })
     //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
@@ -90,9 +91,8 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
-<<<<<<< HEAD
 const savePreferences = (storedCities) => {
-    localStorage.setItem('storedCities', JSON.stringify(storedCities));
+    storedCities = localStorage.setItem('storedCities', JSON.stringify(storedCities));
 };
 
 // function to retrieve user's search history 
@@ -108,24 +108,6 @@ function displayData(data) {
         parksData.push(data[i]);
         console.log(parksData)
     }
-=======
-      const savePreference = () => {
-     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
- };
-
-// function to retrieve user's search history 
- const getPreferences = () => {
-     storedCities = JSON.parse(localStorage.getItem("storedCities"));
- };
-
-//function to display location data
-function displayData(data) {
-    $('#resultsDisplayPanel2').append(
-        `<div> City: ${data}</div>
-        `
-    );
-
->>>>>>> e50cd7350b329f9ead5917b0a6e1ec95169c7ced
 }
 
 // add event listener for button click
