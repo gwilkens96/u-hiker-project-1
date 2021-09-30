@@ -5,6 +5,9 @@ var search_results = $('#search_results');
 let searchHistoryEl = $('#searchHistory');
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
+var resultsDisplay2 = $('#resultsDisplayPanel');
+var cityName = document.createElement('p');
+var cityAddress = document.createElement('p');
 
 let storedCities = [];
 let suggestedCities = [];
@@ -35,7 +38,7 @@ function callData (event) {
     fetchApi(city);
 
     console.log(city);
-    displayData(city);
+    
     //displayData2(city);
     //this is to save the users search history to local storage
     //savePreferences(city);
@@ -54,8 +57,8 @@ function callData (event) {
 // }
 
 //function to get api location data 
-function fetchApi() {
-    fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=city", {
+function fetchApi(city) {
+    fetch(("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=" + city), {
 	"method": "GET",
 	"headers": {
 		"x-api-key": "UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz",
@@ -74,7 +77,9 @@ function fetchApi() {
      for (let i = 0; i < data.data.length; i++){
         console.log(data.data[i]);
         console.table(data.data[i]);
+        
     }
+    displayData(data);
  })
     //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
     //var hostUrl = 'https://enigmatic-citadel-24557.herokuapp.com/';
@@ -120,7 +125,12 @@ function fetchApi() {
 
 //function to display location data
 function displayData(data) {
-    
+    console.log(data);
+    cityName.textContent = data.name;
+    cityAddress.textContent = data.addresses;
+    console.log(resultsDisplay2);
+    resultsDisplay2[0].appendChild(cityName);
+    resultsDisplay2[0].appendChild(cityAddress);
 
 }
 
