@@ -90,6 +90,7 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
+<<<<<<< HEAD
 const savePreferences = (storedCities) => {
     localStorage.setItem('storedCities', JSON.stringify(storedCities));
 };
@@ -107,6 +108,24 @@ function displayData(data) {
         parksData.push(data[i]);
         console.log(parksData)
     }
+=======
+      const savePreference = () => {
+     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
+ };
+
+// function to retrieve user's search history 
+ const getPreferences = () => {
+     storedCities = JSON.parse(localStorage.getItem("storedCities"));
+ };
+
+//function to display location data
+function displayData(data) {
+    $('#resultsDisplayPanel2').append(
+        `<div> City: ${data}</div>
+        `
+    );
+
+>>>>>>> e50cd7350b329f9ead5917b0a6e1ec95169c7ced
 }
 
 // add event listener for button click
