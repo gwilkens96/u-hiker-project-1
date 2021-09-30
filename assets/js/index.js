@@ -6,24 +6,24 @@ let searchHistoryEl = $('#searchHistory');
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
 
-// let storedCities = [];
-// let suggestedCities = [];
+let storedCities = [];
+let suggestedCities = [];
 
-// const renderCities = (searchCount) => {
-//     searchHistoryButtonsEl.innerHtml = '';
-//     for (let i = 0; i < searchCount; i++){
-//         let city = storedCities[i];
+const renderCities = (searchCount) => {
+    searchHistoryButtonsEl.innerHtml = '';
+    for (let i = 0; i < searchCount; i++){
+        let city = storedCities[i];
 
-//         $('searchHistoryButtonsEl').empty();
+        $('searchHistoryButtonsEl').empty();
 
-//         let li = document.createElement('li');
-//         li.textContent = city;
-//         li.setAttribute('data-index', i);
-//         li.setAttribute('class', 'list-group-item list-group-item-action');
-//         li.setAttribute('href', './results.html');
-//         $('search_history_buttons').appendChild();
-//     }
-// }
+        let li = document.createElement('li');
+        li.textContent = city;
+        li.setAttribute('data-index', i);
+        li.setAttribute('class', 'list-group-item list-group-item-action');
+        li.setAttribute('href', './results.html');
+        $('search_history_buttons').appendChild();
+    }
+}
 
 //function to call location data
 //prevent default
@@ -41,15 +41,15 @@ function callData (event) {
     search_input = '';
 }
 
-// const init = () => {
-//     let searchCount = storedCities.length;
-//     if (searchCount !== (null || undefined)) {
-//         renderCities();
-//     } else {
-//         let storedCities = suggestedCities;
-//     }
+const init = () => {
+    let searchCount = storedCities.length;
+    if (searchCount !== (null || undefined)) {
+        renderCities();
+    } else {
+        let storedCities = suggestedCities;
+    }
 
-// }
+}
 
 //function to get api location data 
 function fetchApi() {
@@ -65,7 +65,14 @@ function fetchApi() {
      return response.json()
  })
  .then(function (data){
-     console.log(data)
+     for (let i = 0; i < data.length; i++) {
+        // console.log(data)
+     }
+    //  console.log(data.data)
+     for (let i = 0; i < data.data.length; i++){
+        console.log(data.data[i]);
+        console.table(data.data[i]);
+    }
  })
     //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
     //var hostUrl = 'https://enigmatic-citadel-24557.herokuapp.com/';
@@ -83,22 +90,28 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
-// const savePreference = () => {
-//     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
-// };
+const savePreferences = (storedCities) => {
+    localStorage.setItem('storedCities', JSON.stringify(storedCities));
+};
 
 // function to retrieve user's search history 
-// const getPreferences = () => {
-//     storedCities = JSON.parse(localStorage.getItem("storedCities"));
-// };
+const getPreferences = (storedCities) => {
+    storedCities = JSON.parse(localStorage.getItem(storedCities));
+    console.log(storedCities)
+};
 
 //function to display location data
-function displayData() {
-
+function displayData(data) {
+    let parksData = [];
+    for (let i = 0; i < data.length; i++){
+        parksData.push(data[i]);
+        console.log(parksData)
+    }
 }
 
 // add event listener for button click
 search_results.click(callData);
+init();
 
 
 //button should display local parks in the area
