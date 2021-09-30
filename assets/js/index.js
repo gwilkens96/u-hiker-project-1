@@ -2,6 +2,29 @@
 var searchForm = $('#searchForm');
 var search_input = $('#search_input');
 var search_results = $('#search_results');
+let searchHistoryEl = $('#searchHistory');
+let searchHistoryButtonsEl = $('#search_history_buttons');
+let searchCountSpanEl = $('#searchCountSpan');
+
+// let storedCities = [];
+// let suggestedCities = [];
+
+// const renderCities = (searchCount) => {
+//     searchHistoryButtonsEl.innerHtml = '';
+//     for (let i = 0; i < searchCount; i++){
+//         let city = storedCities[i];
+
+//         $('searchHistoryButtonsEl').empty();
+
+//         let li = document.createElement('li');
+//         li.textContent = city;
+//         li.setAttribute('data-index', i);
+//         li.setAttribute('class', 'list-group-item list-group-item-action');
+//         li.setAttribute('href', './results.html');
+//         $('search_history_buttons').appendChild();
+//     }
+// }
+
 //function to call location data
 //prevent default
 function callData (event) {
@@ -17,6 +40,16 @@ function callData (event) {
     //this is to clear the input search bar
     search_input = '';
 }
+
+// const init = () => {
+//     let searchCount = storedCities.length;
+//     if (searchCount !== (null || undefined)) {
+//         renderCities();
+//     } else {
+//         let storedCities = suggestedCities;
+//     }
+
+// }
 
 //function to get api location data 
 function fetchApi() {
