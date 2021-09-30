@@ -2,7 +2,7 @@
 var searchForm = $('#searchForm');
 var search_input = $('#search_input');
 var search_results = $('#search_results');
-let searchHistoryEl = $('#searchHistory');
+let searchHistory = document.querySelector('#searchHistory')
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
 
@@ -12,20 +12,24 @@ let locallyStoredParks = [];
 let storedParks = [];
 
 const renderCities = () => {
-    searchHistoryEl.innerHtml = '';
-    searchCountSpanEl.textContent = cities.length;
-
+    searchHistory.innerHTML = '';
     for (let i = 0; i < cities.length; i++){
         let city = cities[i];
+        
+        let a = document.createElement('a');
+        
+        a.href = './results.html';
 
-        $('searchHistoryButtonsEl').empty();
-
-        let li = document.createElement('li');
-        li.textContent = city;
-        li.setAttribute('data-index', i);
-        li.setAttribute('class', 'list-group-item list-group-item-action');
-        li.setAttribute('href', './results.html');
-        $('search_history_buttons').append(li);
+        let button = document.createElement('button');
+        button.setAttribute('class', 'btn btn-link mt-2');
+        button.addEventListener('click', callData)
+    
+        button.textContent = city;
+        button.value = button.textContent
+        
+        button.appendChild(a);
+        searchHistory.appendChild(button);
+        // searchHistory.appendChild(li);
     }
 }
 
@@ -58,7 +62,6 @@ function callData (event) {
     if (city === ''){
         return;
     }
-
     cities.push(city);
     search_input.value = '';
     storeCities();
@@ -91,18 +94,8 @@ function fetchApi() {
 
 search_results.click(callData);
 init();
-
-
-
-
-
 //function to display location data
 function displayData(parks) {
     
 
 }
-
-//button should display local parks in the area
-
-//when local parks display you should be able to click on them and the page should change to results.html
-
