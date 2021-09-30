@@ -24,9 +24,9 @@ function planButton(){
 
 // JavaScript code
 function search_origin() {
-	let input = document.getElementById('originFormInput').value
+	var input = document.getElementById('originFormInput').value
 	input=input.toLowerCase();
-	let x = document.getElementsByClassName('origin');
+	var x = document.getElementsByClassName('origin');
 	
 	for (i = 0; i < x.length; i++) {
 		if (!x[i].innerHTML.toLowerCase().includes(input)) {
@@ -39,9 +39,9 @@ function search_origin() {
 }
 
 function search_destination() {
-	let input = document.getElementById('destinationFormInput').value
+	var input = document.getElementById('destinationFormInput').value
 	input=input.toLowerCase();
-	let x = document.getElementsByClassName('destination');
+	var x = document.getElementsByClassName('destination');
 	
 	for (i = 0; i < x.length; i++) {
 		if (!x[i].innerHTML.toLowerCase().includes(input)) {
@@ -57,5 +57,3 @@ fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=1
 
 //Functions to display the route directions from api
 var app = document.querySelector('#directions');
-
-var 
