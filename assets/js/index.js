@@ -6,11 +6,13 @@ let searchHistoryEl = $('#searchHistory');
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
 
+
+let locallyStoredCities = [];
 let storedCities = [];
 let suggestedCities = [];
 
 const renderCities = (storedCities) => {
-    for (let i = 0; i < storedCities.length; i++){
+    for (let i = 0; i < storedCities; i++){
         let city = storedCities[i];
 
         $('searchHistoryButtonsEl').empty();
@@ -34,10 +36,12 @@ function callData (event) {
     fetchApi(city);
 
     console.log(city);
+    locallyStoredCities.push(city)
+    console.log(locallyStoredCities)
     //this is to save the users search history to local storage
-    savePreferences(city);
+    savePreferences(locallyStoredCities);
     //this is to clear the input search bar
-    search_input = '';
+    search_input.value = '';
 }
 
 const init = () => {
@@ -69,10 +73,10 @@ function fetchApi() {
      }
     //  console.log(data.data)
      for (let i = 0; i < data.data.length; i++){
-        console.log(data.data[i]);
+        // console.log(data.data[i]);
         // console.table(data.data[i]);
-        savePreferences(data.data[i])
-        displayData(data.data[i])
+        // savePreferences(data.data[i])
+        // displayData(data.data[i])
     }
  })
     //var api = 'https://developer.nps.gov/api/v1/activities/parks?id=hiking&q=city&sort=GA&api_key=UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz'
@@ -92,23 +96,23 @@ function fetchApi() {
 }
 // function to save the users searches to local storage 
 const savePreferences = (storedCities) => {
-    storedCities = localStorage.setItem('storedCities', JSON.stringify(storedCities));
+    localStorage.setItem('storedCities', JSON.stringify(storedCities));
 };
 
 // function to retrieve user's search history 
 const getPreferences = (storedCities) => {
-    storedCities = JSON.parse(localStorage.getItem(storedCities));
-    console.log(storedCities)
+    JSON.parse(localStorage.getItem(storedCities));
+    // console.log(storedCities)
 };
 
 //function to display location data
-function displayData(data) {
-    let parksData = [];
-    for (let i = 0; i < data.length; i++){
-        parksData.push(data[i]);
-        console.log(parksData)
-    }
-}
+// function displayData(data) {
+//     let parksData = [];
+//     for (let i = 0; i < data.length; i++){
+//         parksData.push(data[i]);
+//         console.log(parksData)
+//     }
+// }
 
 // add event listener for button click
 search_results.click(callData);
