@@ -8,16 +8,14 @@
     <title>Route Planner</title>
 </head>
 <body>
-<header>
+<header class="container-fluid bg-success text-white mt-3 text-success ms-3">
     <h1>U-Hiker</h1>
-    <button type="button" class="col-1 btn btn-success" id="returnBtn">
-        Return
-    </button>
-
-    <h2>
-        Route Planner
-    </h2>
 </header>
+    
+<h1 class="text-center mt-5">Route Planner</h1>
+
+<button type="button" class="col-1 btn btn-success" id="returnBtn">Return</button>
+
     
     <div class="container">
         <div class="row">
@@ -33,12 +31,14 @@
           </button>
         </div>
 
-    <ul style="list-style-type:none;" id='directions'> 
+    <div class="container p-3 mb-2 bg-light text-dark mt-5 border border-secondary">
+        <ul style="list-style-type:decimal;" id='directions'> 
     Route Directions
         <li>
 
         </li>
     </ul>
+    </div>
     <script src="assets/js/results.js"></script>
 </body>
 </html>

@@ -50,17 +50,21 @@ function fetchApi() {
 // })
 }
 // function to save the users searches to local storage 
-// const savePreference = () => {
-//     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
-// };
+      const savePreference = () => {
+     storedCities = localStorage.setItem("storedCities", JSON.stringify(storedCities));
+ };
 
 // function to retrieve user's search history 
-// const getPreferences = () => {
-//     storedCities = JSON.parse(localStorage.getItem("storedCities"));
-// };
+ const getPreferences = () => {
+     storedCities = JSON.parse(localStorage.getItem("storedCities"));
+ };
 
 //function to display location data
-function displayData() {
+function displayData(data) {
+    $('#resultsDisplayPanel2').append(
+        `<div> City: ${data}</div>
+        `
+    );
 
 }
 

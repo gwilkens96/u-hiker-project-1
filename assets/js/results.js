@@ -56,4 +56,6 @@ function search_destination() {
 fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=110+S+Main+St,+Hiawassee+GA&to=541+Historic+Hwy,+Demorest+GA')
 
 //Functions to display the route directions from api
-let app = document.querySelector('#directions');
+var app = document.querySelector('#directions');
+
+var 
