@@ -1,3 +1,38 @@
 * {
     box-sizing: border-box;
 }
+
+body {
+    background-color: rgb(240, 216, 184);
+}
+header {
+    padding-bottom: 2%;
+    text-align: center;
+}
+
+#title {
+    margin-top: 2%;
+    font-size: 300%;
+}
+
+h1 {
+    display: inline-block;
+    text-align: left;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+div.row {
+    justify-content: center;
+    text-align: center;
+}
+
+#resultsDisplayPanel {
+    background-color: whitesmoke;
+}
+
+#searchHistory {
+    background-color: whitesmoke;
+}
