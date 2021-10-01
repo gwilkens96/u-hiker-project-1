@@ -2,33 +2,26 @@
 var searchForm = $('#searchForm');
 var search_input = $('#search_input');
 var search_results = $('#search_results');
-let searchHistoryEl = $('#searchHistory');
+let searchHistory = document.querySelector('#searchHistory')
 let searchHistoryButtonsEl = $('#search_history_buttons');
 let searchCountSpanEl = $('#searchCountSpan');
-var resultsDisplay2 = $('#resultsDisplayPanel');
-var cityName = document.createElement('p');
-var cityAddress = document.createElement('p');
+let resultsDisplayPanel2 = document.querySelector('#resultsDisplayPanel2');
 
 let cities = [];
-let parks = [];
+// let parks = [];
 let locallyStoredParks = [];
 let storedParks = [];
 
 const renderCities = () => {
-    searchHistoryEl.innerHtml = '';
-    searchCountSpanEl.textContent = cities.length;
-
+    searchHistory.innerHTML = '';
     for (let i = 0; i < cities.length; i++){
         let city = cities[i];
-
-        $('searchHistoryButtonsEl').empty();
-
-        let li = document.createElement('li');
-        li.textContent = city;
-        li.setAttribute('data-index', i);
-        li.setAttribute('class', 'list-group-item list-group-item-action');
-        li.setAttribute('href', './results.html');
-        $('search_history_buttons').append(li);
+        let button = document.createElement('button');
+        button.setAttribute('class', 'btn btn-success');
+        button.setAttribute('id', 'search_history_buttons');
+        button.setAttribute('type', 'submit')
+        button.textContent = city;
+        searchHistory.appendChild(button);
     }
 }
 
@@ -52,6 +45,35 @@ const storeCities = () => {
 const saveParks = (storedParks) => {
     localStorage.setItem('storedParks', JSON.stringify(storedParks));
 }
+function displayData() {
+    parks = (JSON.parse(localStorage.getItem('storedParks')))
+    for (let i = 0; i < parks.length; i++){
+        park = parks[i];
+        let parkName = park.fullName;
+        let parkDescription = park.description; 
+        let parkAddress = park.addresses;
+        let parkPictures = park.images[i];
+        let parklatitude = park.latitude;
+        let parklongitude = park.longitude;
+        console.log(parklongitude)
+        console.log(parklatitude)
+        console.log(parkPictures)
+        console.log(parkDescription)
+        console.log(parkName)
+        console.log(parkAddress)
+
+        let h3 = document.createElement('h3');
+        h3.textContent = parkName;
+        let p = document.createElement('p');
+        p.textContent = parkDescription;
+        let p2 = document.createElement('p');
+        p2.textContent = parkAddress;
+
+
+        resultsDisplayPanel2.append(h3)
+        resultsDisplayPanel2.append(p)
+    }
+}
 
 function callData (event) {
     event.preventDefault();
@@ -61,11 +83,21 @@ function callData (event) {
     if (city === ''){
         return;
     }
-
     cities.push(city);
     search_input.value = '';
     storeCities();
+    displayData();
     renderCities();
+}
+
+const callHistory = (event) => {
+    event.preventDefault();
+
+    let city = searchHistoryButtonsEl.textContent;
+    
+
+
+
 }
 //function to get api location data 
 function fetchApi(city) {
@@ -81,35 +113,13 @@ function fetchApi(city) {
      return response.json()
  })
  .then(function (data){
-     for (let i = 0; i < data.length; i++) {
-        // console.log(data)
-     }
-    //  console.log(data.data)
      for (let i = 0; i < data.data.length; i++){
         locallyStoredParks.push(data.data[i]);
         saveParks(locallyStoredParks);
     };
  })
 }
-
-
-//function to display location data
- function displayData(data) {
-     cityName.textContent = data.data.name;
-     cityAddress.textContent = data.data.addresses;
-     resultsDisplay2.appendChild(cityName);
-     resultsDisplay2.appendChild(cityAddress);
-
- }
- for (let j = 0; j < data.data[i].length; j++){
-    displayData(data[j]);
-}
- 
-
-search_results.click(callData, displayData);
+searchHistoryButtonsEl.click(callHistory);
+search_results.click(callData);
 init();
-
-//button should display local parks in the area
-
-//when local parks display you should be able to click on them and the page should change to results.html
-
+//function to display location data
