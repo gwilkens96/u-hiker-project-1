@@ -22,6 +22,11 @@ function planButton(){
 	})
 	.then(function(data){
 		console.log(data);
+		console.log(data.route);
+		console.log(data.route.legs);
+		for(let i = 0; i < data.route.legs.length; i++){
+			console.log(data.route.legs[0].maneuvers[i].narrative);
+		}
 	})
 	
 }
