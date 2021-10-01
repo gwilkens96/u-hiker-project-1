@@ -11,13 +11,27 @@ header {
 }
 
 #title {
-    margin-top: 2%;
     font-size: 300%;
+    margin-top: 5;
+    padding-top: 50px;
+}
+
+div.head-div {
+    margin: auto;
+    text-align: center;
+}
+
+.headerImage {
+    width: 20px;
+    height: auto;
 }
 
 h1 {
     display: inline-block;
-    text-align: left;
+    }
+
+img {
+    padding-bottom: 0;
 }
 
 h2 {
@@ -27,12 +41,13 @@ h2 {
 div.row {
     justify-content: center;
     text-align: center;
+    padding-top: 0px;
 }
 
 #resultsDisplayPanel {
     background-color: whitesmoke;
 }
 
-#searchHistory {
+div.card-header {
     background-color: whitesmoke;
 }
