@@ -3,25 +3,28 @@ var searchForm = $('#searchForm');
 var search_input = $('#search_input');
 var search_results = $('#search_results');
 let searchHistory = document.querySelector('#searchHistory')
-let searchHistoryButtonsEl = $('#search_history_buttons');
+let searchHistoryButtonsEl;
 let searchCountSpanEl = $('#searchCountSpan');
 let resultsDisplayPanel2 = document.querySelector('#resultsDisplayPanel2');
-
 let cities = [];
-// let parks = [];
+let parks = [];
 let locallyStoredParks = [];
 let storedParks = [];
+
+
 
 const renderCities = () => {
     searchHistory.innerHTML = '';
     for (let i = 0; i < cities.length; i++){
         let city = cities[i];
         let button = document.createElement('button');
-        button.setAttribute('class', 'btn btn-success');
+        button.setAttribute('class', 'btn btn-success button' + [i]);
         button.setAttribute('id', 'search_history_buttons');
         button.textContent = city;
         searchHistory.appendChild(button);
+        button.addEventListener('click', callHistory);
     }
+    
 }
 
 const init = () => {
@@ -43,12 +46,14 @@ const storeCities = () => {
 
 const saveParks = (storedParks) => {
     localStorage.setItem('storedParks', JSON.stringify(storedParks));
+    console.log('dataStored')
 }
 function displayData() {
-    parks = (JSON.parse(localStorage.getItem('storedParks')))
+    let parks = (JSON.parse(localStorage.getItem('storedParks')))
+    console.log(parks);
     let numberOfParks = parks.length;
     for (let i = 0; i < numberOfParks; i++){
-        park = parks[i];
+        let park = parks[i];
         let parkName = park.fullName;
         let parkDescription = park.description; 
         let parkPictures = park.images[i];
@@ -105,19 +110,29 @@ function callData (event) {
     }
     cities.push(city);
     search_input.value = '';
+    
     storeCities();
     renderCities();
-    displayData();
+    searchHistoryButtonsEl = $('#search_history_buttons');
+    console.log(searchHistoryButtonsEl);
+    console.log(searchHistoryButtonsEl);
 }
 
 const callHistory = (event) => {
     event.preventDefault();
+    console.log('button clicked')
     resultsDisplayPanel2.innerHTML = '';
-    displayData();
+    console.log(event)
+    city = event.target.textContent;
+    console.log(city)
+    fetchApi(city);
+    
 }
 //function to get api location data 
-function fetchApi() {
-    fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=city", {
+function fetchApi(city) {
+    resultsDisplayPanel2.innerHTML = ''
+    console.log('make an api call')
+    fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q="+city, {
 	"method": "GET",
 	"headers": {
 		"x-api-key": "UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz",
@@ -131,11 +146,13 @@ function fetchApi() {
  .then(function (data){
      for (let i = 0; i < data.data.length; i++){
         locallyStoredParks.push(data.data[i]);
+        console.log('saving parks')
         saveParks(locallyStoredParks);
     };
+    displayData();
  })
 }
-searchHistoryButtonsEl.click(callHistory);
+
 search_results.click(callData);
 init();
 //function to display location data
