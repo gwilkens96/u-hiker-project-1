@@ -94,12 +94,19 @@ function fetchApi(city) {
 
 
 //function to display location data
-function displayData() {
-    
+ function displayData(data) {
+     cityName.textContent = data.data.name;
+     cityAddress.textContent = data.data.addresses;
+     resultsDisplay2.appendChild(cityName);
+     resultsDisplay2.appendChild(cityAddress);
 
+ }
+ for (let j = 0; j < data.data[i].length; j++){
+    displayData(data[j]);
 }
+ 
 
-search_results.click(callData);
+search_results.click(callData, displayData);
 init();
 
 //button should display local parks in the area
