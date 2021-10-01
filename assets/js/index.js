@@ -56,6 +56,7 @@ function displayData() {
         let park = parks[i];
         let parkName = park.fullName;
         let parkDescription = park.description; 
+        let parkAddress = park.addresses;
         let parkPictures = park.images[i];
         let parklatitude = park.latitude;
         let parklongitude = park.longitude;
@@ -71,13 +72,14 @@ function displayData() {
         console.log(parkPictures)
         console.log(parkDescription)
         console.log(parkName)
+        console.log(parkAddress)
 
         let h3 = document.createElement('h3');
         h3.textContent = parkName;
         let p = document.createElement('p');
         p.textContent = parkDescription;
         let p2 = document.createElement('p');
-        p2.textContent = parklatitude;
+        p2.textContent = parkAddress;
         let p3 = document.createElement('p');
         p3.textContent = parklongitude;
         let h4El1 = document.createElement('h4');
@@ -89,6 +91,7 @@ function displayData() {
         let h4El4 = document.createElement('h4');
         h4El4.textContent = postalCode;
         
+
         resultsDisplayPanel2.append(h3)
         resultsDisplayPanel2.append(h4El1);
         resultsDisplayPanel2.append(h4El2);
@@ -130,9 +133,13 @@ const callHistory = (event) => {
 }
 //function to get api location data 
 function fetchApi(city) {
+<<<<<<< HEAD
     resultsDisplayPanel2.innerHTML = ''
     console.log('make an api call')
     fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q="+city, {
+=======
+    fetch(("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=" + city), {
+>>>>>>> 92382a67ddcb377cde65f59c5e42238d9cae5894
 	"method": "GET",
 	"headers": {
 		"x-api-key": "UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz",
