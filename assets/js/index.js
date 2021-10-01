@@ -19,7 +19,6 @@ const renderCities = () => {
         let button = document.createElement('button');
         button.setAttribute('class', 'btn btn-success');
         button.setAttribute('id', 'search_history_buttons');
-        button.setAttribute('type', 'submit')
         button.textContent = city;
         searchHistory.appendChild(button);
     }
@@ -47,13 +46,21 @@ const saveParks = (storedParks) => {
 }
 function displayData() {
     parks = (JSON.parse(localStorage.getItem('storedParks')))
-    for (let i = 0; i < parks.length; i++){
+    let numberOfParks = parks.length;
+    for (let i = 0; i < numberOfParks; i++){
         park = parks[i];
         let parkName = park.fullName;
         let parkDescription = park.description; 
         let parkPictures = park.images[i];
         let parklatitude = park.latitude;
         let parklongitude = park.longitude;
+        let parkAddresses = park.addresses[0];
+        let address1 = parkAddresses.line3;
+        let address2 = parkAddresses.city;
+        let state = parkAddresses.stateCode; 
+        let postalCode = parkAddresses.postalCode;
+
+        console.log(parkAddresses)
         console.log(parklongitude)
         console.log(parklatitude)
         console.log(parkPictures)
@@ -64,9 +71,27 @@ function displayData() {
         h3.textContent = parkName;
         let p = document.createElement('p');
         p.textContent = parkDescription;
-
+        let p2 = document.createElement('p');
+        p2.textContent = parklatitude;
+        let p3 = document.createElement('p');
+        p3.textContent = parklongitude;
+        let h4El1 = document.createElement('h4');
+        h4El1.textContent = address1;
+        let h4El2 = document.createElement('h4');
+        h4El2.textContent = address2; 
+        let h4El3 = document.createElement('h4');
+        h4El3.textContent = state; 
+        let h4El4 = document.createElement('h4');
+        h4El4.textContent = postalCode;
+        
         resultsDisplayPanel2.append(h3)
+        resultsDisplayPanel2.append(h4El1);
+        resultsDisplayPanel2.append(h4El2);
+        resultsDisplayPanel2.append(h4El3);
+        resultsDisplayPanel2.append(h4El4);
         resultsDisplayPanel2.append(p)
+        resultsDisplayPanel2.append(p2)
+        resultsDisplayPanel2.append(p3)
     }
 }
 
@@ -81,18 +106,14 @@ function callData (event) {
     cities.push(city);
     search_input.value = '';
     storeCities();
-    displayData();
     renderCities();
+    displayData();
 }
 
 const callHistory = (event) => {
     event.preventDefault();
-
-    let city = searchHistoryButtonsEl.textContent;
-    
-
-
-
+    resultsDisplayPanel2.innerHTML = '';
+    displayData();
 }
 //function to get api location data 
 function fetchApi() {
