@@ -15,7 +15,14 @@ document.getElementById("planBtn").addEventListener("click", planButton);
 function planButton(){
     //Using API plan out directions for display
     //Verify button is functional
-	window.location.href="http://www.google.com";
+	fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=110+S+Main+St,+Hiawassee+GA&to=541+Historic+Hwy,+Demorest+GA')
+	.then(function(response){
+		console.log(response);
+		return response.json();
+	})
+	.then(function(data){
+		console.log(data);
+	})
 	
 }
 
@@ -54,6 +61,9 @@ function search_destination() {
 	}
 }
 
-fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=110+S+Main+St,+Hiawassee+GA&to=541+Historic+Hwy,+Demorest+GA')
+// const getMapData = (mapData) => {
+
+// }
+
 
 //Functions to display the route directions from api
