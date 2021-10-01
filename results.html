@@ -10,39 +10,45 @@
     <title>Route Planner</title>
 </head>
 <body>
-<header id='siteTitle' class="container-fluid bg-success text-white text-success">
-    <h1 id='title'>U-Hiker</h1>
+  <header id="siteTitle" class="container-fluid bg-success text-white text-success">
+    <div class='head-div row '>
+        <div class='col-4'></div>
+        <img id="rightie" class='col headerImage' src="assets/images/tree-icon.png" alt='happy little trees right'>
+        <h1 id='title' class='col-2'>U-Hiker</h1>
+        <img id='leftie' class='col headerImage' src="assets/images/tree-icon.png" alt='happy little trees left'>
+      <div class='col-4'></div>
+    </div>  
 </header>
     
 <h2 class="text-center mt-5">Route Planner</h2>
 
-<div class="d-flex flex-row-reverse bd-highlight p-3">
-  <button type="button" class="col-1 btn btn-success" id="returnBtn">Return</button>
-</div>
 
-    
-    <div class="container">
-        <div class="row">
-          <div class="col mb-3">
-            <label for="originFormInput" class="form-label"></label>
-            <input type="text" class="form-control" id="originFormInput" placeholder="Origin">   
-          </div>
-          <div class="col mb-3">
-            <label for="destinationFormlInput" class="form-label"></label>
-            <input type="text" class="form-control" id="destinationFormlInput" placeholder="Destination">
-          </div>
-          <button type="button" class="col-2 btn btn-success" id="planBtn">Plan my route!
-          </button>
-        </div>
 
-    <div id="routeDirections" class="container p-3 mb-2 bg-light text-dark mt-5 border border-secondary">
-        <ul style="list-style-type:decimal;" id='directions'> 
-    Route Directions
-        <li>
-
-        </li>
-    </ul>
+<div class="container">
+  <div class="row">
+    <div class="col mb-3">
+      <label for="originFormInput" class="form-label"></label>
+      <input type="text" class="form-control" id="originFormInput" placeholder="Origin">   
     </div>
+    <div class="col mb-3">
+      <label for="destinationFormlInput" class="form-label"></label>
+      <input type="text" class="form-control" id="destinationFormlInput" placeholder="Destination">
+    </div>
+    <button type="button" class="col-2 btn btn-success" id="planBtn">Plan my route!
+    </button>
+  </div>
+  
+  <div id="routeDirections" class="container p-3 mb-2 bg-light text-dark mt-5 border border-secondary">
+    <ul style="list-style-type:decimal;" id='directions'> 
+      Route Directions
+      <li>
+        
+      </li>
+    </ul>
+  </div>
+  <div class="d-flex flex-row-reverse bd-highlight p-3">
+    <button type="button" class="col-1 btn btn-success" id="returnBtn">Return</button>
+  </div>
     <script src="assets/js/results.js"></script>
 </body>
 </html>
