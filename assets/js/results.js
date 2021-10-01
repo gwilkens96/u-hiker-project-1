@@ -23,8 +23,6 @@ function planButton(){
 	.then(function(data){
 		console.log(data);
 	})
-
-
 	
 }
 
