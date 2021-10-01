@@ -18,11 +18,7 @@ const renderCities = () => {
     for (let i = 0; i < cities.length; i++){
         let city = cities[i];
         let button = document.createElement('button');
-<<<<<<< HEAD
         button.setAttribute('class', 'btn btn-success button' + [i]);
-=======
-        button.setAttribute('class', 'btn btn-success border border-dark');
->>>>>>> c96f5df4c2b4a40695432915e0d49bf9faf50f0c
         button.setAttribute('id', 'search_history_buttons');
         button.textContent = city;
         searchHistory.appendChild(button);
@@ -137,13 +133,9 @@ const callHistory = (event) => {
 }
 //function to get api location data 
 function fetchApi(city) {
-<<<<<<< HEAD
     resultsDisplayPanel2.innerHTML = ''
     console.log('make an api call')
     fetch("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q="+city, {
-=======
-    fetch(("https://jonahtaylor-national-park-service-v1.p.rapidapi.com/parks?stateCode=GA&q=" + city), {
->>>>>>> 92382a67ddcb377cde65f59c5e42238d9cae5894
 	"method": "GET",
 	"headers": {
 		"x-api-key": "UvxChY0rHbVLRYwGkgPtnvDIIsDwNaq4axOvWZQz",
