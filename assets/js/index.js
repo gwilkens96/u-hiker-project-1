@@ -18,7 +18,11 @@ const renderCities = () => {
     for (let i = 0; i < cities.length; i++){
         let city = cities[i];
         let button = document.createElement('button');
+<<<<<<< HEAD
         button.setAttribute('class', 'btn btn-success button' + [i]);
+=======
+        button.setAttribute('class', 'btn btn-success border border-dark');
+>>>>>>> c96f5df4c2b4a40695432915e0d49bf9faf50f0c
         button.setAttribute('id', 'search_history_buttons');
         button.textContent = city;
         searchHistory.appendChild(button);
