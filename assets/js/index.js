@@ -36,7 +36,6 @@ const init = () => {
     if(storedCities !== null) {
         cities = storedCities
     }
-
     renderCities();
 }
 
@@ -118,7 +117,7 @@ function callData (event) {
         return;
     }
     cities.push(city);
-    search_input.value = '';
+    search_input[0].value = '';
     
     storeCities();
     renderCities();
