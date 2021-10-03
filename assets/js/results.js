@@ -1,34 +1,65 @@
 //Javascript file for results page to display the resulting route
-var startingLocation= ""; //Needs Street #+Street Name,+City+State Abbreviation
-var endingLocation = ""; 
-var mapQuestKey = "zNckYjgkLkSAXpgDGRxBBLNJ9JQI78fG";
+let startingLocation; //Needs Street #+Street Name,+City+State Abbreviation
+let endingLocation;
+let mapQuestKey = "zNckYjgkLkSAXpgDGRxBBLNJ9JQI78fG";
+let search_origin_inputEl = document.querySelector('#originFormInput');
+let destination_inputEl = document.querySelector('#destinationFormInput');
+let directionsEl = document.querySelector('#directions');
 //Button to return to the index page
 
-document.getElementById("returnBtn").addEventListener("click", returnButton);
-
-function returnButton() {
+function returnButton(event) {
+	event.preventDefault();
     window.location.href="index.html";
 }
 //Button to plan the route and give directions
-document.getElementById("planBtn").addEventListener("click", planButton);
 
-function planButton(){
-    //Using API plan out directions for display
-    //Verify button is functional
-	fetch('http://www.mapquestapi.com/directions/v2/route?key='+mapQuestKey+'&from=110+S+Main+St,+Hiawassee+GA&to=541+Historic+Hwy,+Demorest+GA')
+
+function planButton(event){
+	event.preventDefault();
+	console.log('button clicked');
+	let origin = search_origin_inputEl.value;
+	let destination = destination_inputEl.value;
+	fetchMapQuestApi(origin, destination);
+	search_origin_inputEl = '';
+	destination_inputEl = '';
+}
+
+function fetchMapQuestApi (startingLocation, endingLocation) {
+	console.log('making api call');
+	console.log(startingLocation);
+	console.log(endingLocation);
+	fetch('http://www.mapquestapi.com/directions/v2/route?key='+ mapQuestKey +'&from=' + startingLocation + '&to=' + endingLocation)
 	.then(function(response){
 		console.log(response);
 		return response.json();
 	})
 	.then(function(data){
+		console.log('retrieving api data');
 		console.log(data);
 		console.log(data.route);
 		console.log(data.route.legs);
 		for(let i = 0; i < data.route.legs.length; i++){
-			console.log(data.route.legs[0].maneuvers[i].narrative);
+			// console.log(data.route.legs[0].maneuvers);
+			displayDirections(data.route.legs[0].maneuvers);
 		}
 	})
-	
+}
+
+function displayDirections (maneuvers) {
+	console.log(maneuvers);
+	let numberOfManeuvers = maneuvers.length;
+	for (let i = 0; i < numberOfManeuvers; i++){
+		let maneuver = maneuvers[i];
+		console.log(maneuver);
+
+		let routeNarrative = maneuver.narrative;
+
+		let li = document.createElement('li');
+		li.textContent = routeNarrative;
+
+		directionsEl.append(li);
+	}
+
 }
 
 //Get destination location from the index and display in box
@@ -36,36 +67,9 @@ function planButton(){
 //Accept a starting location for directions between start/end
 
 // JavaScript code
-function search_origin() {
-	var input = document.getElementById('originFormInput').value
-	input=input.toLowerCase();
-	var x = document.getElementsByClassName('origin');
-	
-	for (i = 0; i < x.length; i++) {
-		if (!x[i].innerHTML.toLowerCase().includes(input)) {
-			x[i].style.display="none";
-		}
-		else {
-			x[i].style.display="list-item";				
-		}
-	}
-}
 
-function search_destination() {
-	var input = document.getElementById('destinationFormInput').value
-	input=input.toLowerCase();
-	var x = document.getElementsByClassName('destination');
-	
-	for (i = 0; i < x.length; i++) {
-		if (!x[i].innerHTML.toLowerCase().includes(input)) {
-			x[i].style.display="none";
-		}
-		else {
-			x[i].style.display="list-item";				
-		}
-	}
-}
-
+document.getElementById("returnBtn").addEventListener("click", returnButton);
+document.getElementById("planBtn").addEventListener("click", planButton);
 // const getMapData = (mapData) => {
 
 // }

@@ -21,9 +21,6 @@
 </header>
     
 <h2 class="text-center mt-5">Route Planner</h2>
-
-
-
 <div class="container">
   <div class="row">
     <div class="col mb-3">
@@ -32,22 +29,17 @@
     </div>
     <div class="col mb-3">
       <label for="destinationFormlInput" class="form-label"></label>
-      <input type="text" class="form-control" id="destinationFormlInput" placeholder="Destination">
+      <input type="text" class="form-control" id="destinationFormInput" placeholder="Destination">
     </div>
     <button type="button" class="col-2 btn btn-success" id="planBtn">Plan my route!
     </button>
   </div>
   
   <div id="routeDirections" class="container p-3 mb-2 bg-light text-dark mt-5 border border-secondary">
-    <ul style="list-style-type:decimal;" id='directions'> 
-      Route Directions
-      <li>
-        
-      </li>
-    </ul>
+    <ul style="list-style-type:decimal;" id='directions'>Route Directions: </ul>
   </div>
   <div class="d-flex flex-row-reverse bd-highlight p-3">
-    <button type="button" class="col-1 btn btn-success" id="returnBtn">Return</button>
+    <button type="button" class="col-2 btn btn-success" id="returnBtn">Return</button>
   </div>
     <script src="assets/js/results.js"></script>
 </body>
