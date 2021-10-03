@@ -36,7 +36,6 @@ const init = () => {
     if(storedCities !== null) {
         cities = storedCities
     }
-
     renderCities();
 }
 
@@ -56,50 +55,50 @@ function displayData() {
         let park = parks[i];
         let parkName = park.fullName;
         let parkDescription = park.description; 
-        let parkAddress = park.addresses;
+        let parkAddress = park.addresses[0];
         let parkPictures = park.images[i];
         let parklatitude = park.latitude;
         let parklongitude = park.longitude;
-        let parkAddresses = park.addresses[0];
-        let address1 = parkAddresses.line3;
-        let address2 = parkAddresses.city;
-        let state = parkAddresses.stateCode; 
-        let postalCode = parkAddresses.postalCode;
+        let address1 = parkAddress.line1;
+        let address2 = parkAddress.line2;
+        let address3 = parkAddress.line3;
+        let parkCity = parkAddress.city; 
+        let state = parkAddress.stateCode; 
+        let postalCode = parkAddress.postalCode;
 
-        console.log(parkAddresses)
+        console.log(parkAddress)
         console.log(parklongitude)
         console.log(parklatitude)
         console.log(parkPictures)
         console.log(parkDescription)
         console.log(parkName)
-        console.log(parkAddress)
 
         let h3 = document.createElement('h3');
         h3.textContent = parkName;
         let p = document.createElement('p');
         p.textContent = parkDescription;
         let p2 = document.createElement('p');
-        p2.textContent = parkAddress;
-        let p3 = document.createElement('p');
-        p3.textContent = parklongitude;
+        p2.textContent = parklatitude + ', ' + parklongitude;
         let h4El1 = document.createElement('h4');
         h4El1.textContent = address1;
         let h4El2 = document.createElement('h4');
-        h4El2.textContent = address2; 
+        h4El2.textContent = address2;
         let h4El3 = document.createElement('h4');
-        h4El3.textContent = state; 
+        h4El3.textContent = address3; 
         let h4El4 = document.createElement('h4');
-        h4El4.textContent = postalCode;
+        h4El4.textContent = parkCity + ', ' + state;
+        let h4El6 = document.createElement('h4');
+        h4El6.textContent = postalCode;
         
 
-        resultsDisplayPanel2.append(h3)
+        resultsDisplayPanel2.append(h3);
         resultsDisplayPanel2.append(h4El1);
         resultsDisplayPanel2.append(h4El2);
         resultsDisplayPanel2.append(h4El3);
         resultsDisplayPanel2.append(h4El4);
-        resultsDisplayPanel2.append(p)
-        resultsDisplayPanel2.append(p2)
-        resultsDisplayPanel2.append(p3)
+        resultsDisplayPanel2.append(h4El6);
+        resultsDisplayPanel2.append(p);
+        resultsDisplayPanel2.append(p2);
     }
 }
 
@@ -112,12 +111,11 @@ function callData (event) {
         return;
     }
     cities.push(city);
-    search_input.value = '';
+    search_input[0].value = '';
     
     storeCities();
     renderCities();
     searchHistoryButtonsEl = $('#search_history_buttons');
-    console.log(searchHistoryButtonsEl);
     console.log(searchHistoryButtonsEl);
 }
 
