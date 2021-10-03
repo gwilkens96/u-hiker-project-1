@@ -4,6 +4,7 @@ let endingLocation;
 let mapQuestKey = "zNckYjgkLkSAXpgDGRxBBLNJ9JQI78fG";
 let search_origin_inputEl = document.querySelector('#originFormInput');
 let destination_inputEl = document.querySelector('#destinationFormInput');
+let directionsEl = document.querySelector('#directions');
 //Button to return to the index page
 
 function returnButton(event) {
@@ -19,6 +20,8 @@ function planButton(event){
 	let origin = search_origin_inputEl.value;
 	let destination = destination_inputEl.value;
 	fetchMapQuestApi(origin, destination);
+	search_origin_inputEl = '';
+	destination_inputEl = '';
 }
 
 function fetchMapQuestApi (startingLocation, endingLocation) {
@@ -36,9 +39,27 @@ function fetchMapQuestApi (startingLocation, endingLocation) {
 		console.log(data.route);
 		console.log(data.route.legs);
 		for(let i = 0; i < data.route.legs.length; i++){
-			console.log(data.route.legs[0].maneuvers[i].narrative);
+			// console.log(data.route.legs[0].maneuvers);
+			displayDirections(data.route.legs[0].maneuvers);
 		}
 	})
+}
+
+function displayDirections (maneuvers) {
+	console.log(maneuvers);
+	let numberOfManeuvers = maneuvers.length;
+	for (let i = 0; i < numberOfManeuvers; i++){
+		let maneuver = maneuvers[i];
+		console.log(maneuver);
+
+		let routeNarrative = maneuver.narrative;
+
+		let li = document.createElement('li');
+		li.textContent = routeNarrative;
+
+		directionsEl.append(li);
+	}
+
 }
 
 //Get destination location from the index and display in box
@@ -46,35 +67,6 @@ function fetchMapQuestApi (startingLocation, endingLocation) {
 //Accept a starting location for directions between start/end
 
 // JavaScript code
-function search_origin() {
-	
-	
-	var x = document.getElementsByClassName('origin');
-	
-	for (i = 0; i < x.length; i++) {
-		if (!x[i].innerHTML.toLowerCase().includes(input)) {
-			x[i].style.display="none";
-		}
-		else {
-			x[i].style.display="list-item";				
-		}
-	}
-}
-
-function search_destination() {
-	var input = document.getElementById('destinationFormInput').value
-	destination_input = input.toLowerCase();
-	var x = document.getElementsByClassName('destination');
-	
-	for (i = 0; i < x.length; i++) {
-		if (!x[i].innerHTML.toLowerCase().includes(input)) {
-			x[i].style.display="none";
-		}
-		else {
-			x[i].style.display="list-item";				
-		}
-	}
-}
 
 document.getElementById("returnBtn").addEventListener("click", returnButton);
 document.getElementById("planBtn").addEventListener("click", planButton);
