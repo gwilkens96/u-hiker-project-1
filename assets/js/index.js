@@ -78,9 +78,7 @@ function displayData() {
         let p = document.createElement('p');
         p.textContent = parkDescription;
         let p2 = document.createElement('p');
-        p2.textContent = parklatitude;
-        let p3 = document.createElement('p');
-        p3.textContent = parklongitude;
+        p2.textContent = parklatitude + ', ' + parklongitude;
         let h4El1 = document.createElement('h4');
         h4El1.textContent = address1;
         let h4El2 = document.createElement('h4');
@@ -88,9 +86,7 @@ function displayData() {
         let h4El3 = document.createElement('h4');
         h4El3.textContent = address3; 
         let h4El4 = document.createElement('h4');
-        h4El4.textContent = parkCity;
-        let h4El5 = document.createElement('h4');
-        h4El5.textContent = state; 
+        h4El4.textContent = parkCity + ', ' + state;
         let h4El6 = document.createElement('h4');
         h4El6.textContent = postalCode;
         
@@ -100,11 +96,9 @@ function displayData() {
         resultsDisplayPanel2.append(h4El2);
         resultsDisplayPanel2.append(h4El3);
         resultsDisplayPanel2.append(h4El4);
-        resultsDisplayPanel2.append(h4El5);
         resultsDisplayPanel2.append(h4El6);
         resultsDisplayPanel2.append(p);
         resultsDisplayPanel2.append(p2);
-        resultsDisplayPanel2.append(p3);
     }
 }
 
