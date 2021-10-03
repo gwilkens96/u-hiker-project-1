@@ -6,6 +6,7 @@ let searchHistory = document.querySelector('#searchHistory')
 let searchHistoryButtonsEl;
 let searchCountSpanEl = $('#searchCountSpan');
 let resultsDisplayPanel2 = document.querySelector('#resultsDisplayPanel2');
+
 let cities = [];
 let parks = [];
 let locallyStoredParks = [];
@@ -47,12 +48,13 @@ const saveParks = (storedParks) => {
     localStorage.setItem('storedParks', JSON.stringify(storedParks));
     console.log('dataStored')
 }
-function displayData() {
-    let parks = (JSON.parse(localStorage.getItem('storedParks')))
+function displayData(parks) {
+    // let parks = (JSON.parse(localStorage.getItem('storedParks')))
     console.log(parks);
     let numberOfParks = parks.length;
     for (let i = 0; i < numberOfParks; i++){
         let park = parks[i];
+        console.log(park);
         let parkName = park.fullName;
         let parkDescription = park.description; 
         let parkAddress = park.addresses[0];
@@ -108,6 +110,7 @@ function callData (event) {
     var city = search_input[0].value;
     fetchApi(city);
     if (city === ''){
+        console.error('You need a search input value!');
         return;
     }
     cities.push(city);
@@ -115,8 +118,8 @@ function callData (event) {
     
     storeCities();
     renderCities();
-    searchHistoryButtonsEl = $('#search_history_buttons');
-    console.log(searchHistoryButtonsEl);
+    // displayData();
+    // searchHistoryButtonsEl = $('#search_history_buttons');
 }
 
 const callHistory = (event) => {
@@ -127,7 +130,6 @@ const callHistory = (event) => {
     city = event.target.textContent;
     console.log(city)
     fetchApi(city);
-    
 }
 //function to get api location data 
 function fetchApi(city) {
@@ -146,11 +148,14 @@ function fetchApi(city) {
  })
  .then(function (data){
      for (let i = 0; i < data.data.length; i++){
-        locallyStoredParks.push(data.data[i]);
-        console.log('saving parks')
-        saveParks(locallyStoredParks);
+        console.log(data.data[i]);
+        displayData(data.data);
+        // locallyStoredParks.push(data.data[i]);
+        // console.log('saving parks')
+        // saveParks(locallyStoredParks);
+        // console.log(locallyStoredParks);
     };
-    displayData();
+    // displayData(data.data[i]);
  })
 }
 
