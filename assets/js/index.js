@@ -147,16 +147,18 @@ function fetchApi(city) {
      return response.json()
  })
  .then(function (data){
-     for (let i = 0; i < data.data.length; i++){
-        console.log(data.data[i]);
-        displayData(data.data);
-        // locallyStoredParks.push(data.data[i]);
-        // console.log('saving parks')
-        // saveParks(locallyStoredParks);
-        // console.log(locallyStoredParks);
-    };
+     displayData(data.data);
+    //  for (let i = 0; i < data.data.length; i++){
+    //     console.log(data.data[i]);
+        
+    //     // locallyStoredParks.push(data.data[i]);
+    //     // console.log('saving parks')
+    //     // saveParks(locallyStoredParks);
+    //     // console.log(locallyStoredParks);
+    // };
     // displayData(data.data[i]);
  })
+ 
 }
 
 search_results.click(callData);
