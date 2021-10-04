@@ -75,6 +75,13 @@ function displayData(parks) {
         console.log(parkDescription)
         console.log(parkName)
 
+        let resultCard = document.createElement('div');
+        resultCard.classList.add('card', 'bg-white', 'text-black', 'mb-3');
+
+        let resultBody = document.createElement('div');
+        resultBody.classList.add('card-body');
+        resultCard.append(resultBody);
+
         let h3 = document.createElement('h3');
         h3.textContent = parkName;
         let p = document.createElement('p');
@@ -91,16 +98,34 @@ function displayData(parks) {
         h4El4.textContent = parkCity + ', ' + state;
         let h4El6 = document.createElement('h4');
         h4El6.textContent = postalCode;
+        let select = document.createElement('btn');
+        select.setAttribute('class', 'btn btn-link btn-success');
+        select.setAttribute('data-index', [i]);
+        select.setAttribute('value', p2.textContent);
+        select.textContent = 'Select';
+        select.addEventListener('click', selectionButtonHandler);
         
-
-        resultsDisplayPanel2.append(h3);
-        resultsDisplayPanel2.append(h4El1);
-        resultsDisplayPanel2.append(h4El2);
-        resultsDisplayPanel2.append(h4El3);
-        resultsDisplayPanel2.append(h4El4);
-        resultsDisplayPanel2.append(h4El6);
-        resultsDisplayPanel2.append(p);
-        resultsDisplayPanel2.append(p2);
+        resultBody.append(h3);
+        resultBody.append(h4El1);
+        resultBody.append(h4El1);
+        resultBody.append(h4El2);
+        resultBody.append(h4El3);
+        resultBody.append(h4El4);
+        resultBody.append(h4El6);
+        resultBody.append(p);
+        resultBody.append(p2);
+        resultBody.append(select);
+        resultsDisplayPanel2.append(resultCard);
+        // resultsDisplayPanel2.append(h3);
+        // resultsDisplayPanel2.append(h4El1);
+        // resultsDisplayPanel2.append(h4El2);
+        // resultsDisplayPanel2.append(h4El3);
+        // resultsDisplayPanel2.append(h4El4);
+        // resultsDisplayPanel2.append(h4El6);
+        // resultsDisplayPanel2.append(p);
+        // resultsDisplayPanel2.append(p2);
+        // resultsDisplayPanel2.append(select);
+        
     }
 }
 
@@ -159,6 +184,12 @@ function fetchApi(city) {
     // displayData(data.data[i]);
  })
  
+}
+
+function selectionButtonHandler(event) {
+    event.preventDefault();
+    let queryString = './results.html'
+    location.assign(queryString);
 }
 
 search_results.click(callData);
